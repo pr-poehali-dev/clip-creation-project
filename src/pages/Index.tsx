@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -31,6 +31,26 @@ const Index = () => {
     });
     setFormData({ name: '', phone: '', message: '' });
   };
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const services = [
     {
@@ -96,17 +116,17 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-red-600"></div>
       </div>
       <div className="relative z-10">
-      <header className="bg-card border-b border-border shadow-lg py-4 px-4">
+      <header className="bg-card border-b border-border shadow-lg py-3 px-4">
         <div className="container mx-auto max-w-6xl flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <img 
               src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
               alt="Весы правосудия" 
-              className="w-12 h-12 object-contain brightness-110"
+              className="w-10 h-10 sm:w-12 sm:h-12 object-contain brightness-110"
             />
             <div>
-              <h2 className="text-xl font-bold text-primary">Юридические услуги</h2>
-              <p className="text-sm text-muted-foreground">Профессиональная правовая помощь</p>
+              <h2 className="text-base sm:text-xl font-bold text-primary">Юридические услуги</h2>
+              <p className="text-xs sm:text-sm text-muted-foreground hidden xs:block">Профессиональная правовая помощь</p>
             </div>
           </div>
           <img 
@@ -117,22 +137,22 @@ const Index = () => {
         </div>
       </header>
 
-      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-accent py-20 px-4">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-accent py-12 sm:py-20 px-4 scroll-animate">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-20"></div>
         
         <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white space-y-6 animate-fade-in">
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="text-white space-y-4 sm:space-y-6 animate-fade-in">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
                 Юридические услуги по банкротству
               </h1>
-              <p className="text-xl text-blue-50 leading-relaxed">
+              <p className="text-base sm:text-xl text-blue-50 leading-relaxed">
                 Профессиональная правовая помощь, адвокатские услуги и юридическое сопровождение в Ростове-на-Дону. Комплексные услуги юриста по банкротству физических и юридических лиц. Бесплатные правовые консультации, защита прав в суде, составление документов, сопровождение сделок и разрешение споров.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button size="lg" variant="secondary" className="text-lg px-8 shadow-xl hover:shadow-2xl transition-all hover:scale-105">
+                    <Button size="lg" variant="secondary" className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105">
                       <Icon name="Phone" className="mr-2" size={20} />
                       Заказать звонок
                     </Button>
@@ -169,7 +189,7 @@ const Index = () => {
                   </DialogContent>
                 </Dialog>
 
-                <Button size="lg" variant="outline" className="text-lg px-8 bg-white/10 backdrop-blur border-white/20 text-white hover:bg-white/20">
+                <Button size="lg" variant="outline" className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 backdrop-blur border-white/20 text-white hover:bg-white/20">
                   <Icon name="Gift" className="mr-2" size={20} />
                   Бесплатная консультация
                 </Button>
@@ -224,30 +244,29 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 px-4">
+      <section className="py-12 sm:py-20 px-4 scroll-animate">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 space-y-4 animate-slide-up">
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">Юридические услуги</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4 animate-slide-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">Юридические услуги</h2>
+            <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
               Полный спектр юридических услуг: адвокатские услуги, правовая помощь, юридические консультации по правовым вопросам, защита прав в суде, юридическое сопровождение сделок, составление документов, регистрация бизнеса и разрешение споров
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50 scroll-animate"
               >
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-xl text-background">
-                      <Icon name={service.icon} size={28} />
+                <CardHeader className="p-4 sm:p-6">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-gradient-to-br from-primary to-accent rounded-xl text-background flex-shrink-0">
+                      <Icon name={service.icon} size={24} className="sm:w-7 sm:h-7" />
                     </div>
-                    <div>
-                      <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                      <CardDescription className="text-base leading-relaxed">
+                    <div className="min-w-0">
+                      <CardTitle className="text-base sm:text-xl mb-2">{service.title}</CardTitle>
+                      <CardDescription className="text-sm sm:text-base leading-relaxed">
                         {service.description}
                       </CardDescription>
                     </div>
@@ -259,32 +278,31 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-secondary/30">
+      <section className="py-12 sm:py-20 px-4 bg-secondary/30 scroll-animate">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 space-y-6">
-            <div className="flex justify-center mb-6">
+          <div className="text-center mb-12 sm:mb-16 space-y-4 sm:space-y-6">
+            <div className="flex justify-center mb-4 sm:mb-6">
               <img 
                 src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
                 alt="Весы правосудия" 
-                className="w-24 h-24 object-contain opacity-80"
+                className="w-16 h-16 sm:w-24 sm:h-24 object-contain opacity-80"
               />
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold">Почему выбирают нас</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Почему выбирают нас</h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {advantages.map((adv, index) => (
               <Card
                 key={index}
-                className="text-center hover:shadow-lg transition-all hover:scale-105 animate-scale-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="text-center hover:shadow-lg transition-all hover:scale-105 scroll-animate"
               >
-                <CardContent className="pt-8 pb-6 space-y-4">
-                  <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-                    <Icon name={adv.icon} size={32} className="text-white" />
+                <CardContent className="pt-6 sm:pt-8 pb-4 sm:pb-6 space-y-3 sm:space-y-4 px-3 sm:px-6">
+                  <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                    <Icon name={adv.icon} size={28} className="text-white sm:w-8 sm:h-8" />
                   </div>
-                  <h3 className="text-xl font-bold">{adv.title}</h3>
-                  <p className="text-muted-foreground">{adv.description}</p>
+                  <h3 className="text-base sm:text-xl font-bold">{adv.title}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">{adv.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -292,57 +310,57 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-white">
+      <section className="py-12 sm:py-20 px-4 bg-card scroll-animate">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl lg:text-5xl font-bold">Свяжитесь с нами</h2>
-              <p className="text-xl text-muted-foreground">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-4 sm:space-y-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Свяжитесь с нами</h2>
+              <p className="text-base sm:text-xl text-muted-foreground">
                 Получите бесплатную консультацию по вашему вопросу
               </p>
 
-              <div className="space-y-4 pt-4">
-                <div className="flex items-center gap-4 text-lg">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Icon name="MapPin" size={24} className="text-primary" />
+              <div className="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
+                <div className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg flex-shrink-0">
+                    <Icon name="MapPin" size={20} className="text-primary sm:w-6 sm:h-6" />
                   </div>
-                  <div>
-                    <p className="font-semibold">Адрес офиса</p>
-                    <p className="text-muted-foreground">Большая Садовая 198, офис 718</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-sm sm:text-base">Адрес офиса</p>
+                    <p className="text-muted-foreground text-sm sm:text-base">Большая Садовая 198, офис 718</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-lg">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Icon name="Phone" size={24} className="text-primary" />
+                <div className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg flex-shrink-0">
+                    <Icon name="Phone" size={20} className="text-primary sm:w-6 sm:h-6" />
                   </div>
-                  <div>
-                    <p className="font-semibold">Телефон</p>
-                    <a href="tel:89282264638" className="text-primary hover:underline">
+                  <div className="min-w-0">
+                    <p className="font-semibold text-sm sm:text-base">Телефон</p>
+                    <a href="tel:89282264638" className="text-primary hover:underline text-sm sm:text-base">
                       8-928-226-46-38
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-lg">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Icon name="Clock" size={24} className="text-primary" />
+                <div className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg flex-shrink-0">
+                    <Icon name="Clock" size={20} className="text-primary sm:w-6 sm:h-6" />
                   </div>
-                  <div>
-                    <p className="font-semibold">Режим работы</p>
-                    <p className="text-muted-foreground">Пн-Пт: 9:00 - 19:00, Сб: 10:00 - 16:00</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-sm sm:text-base">Режим работы</p>
+                    <p className="text-muted-foreground text-sm sm:text-base">Пн-Пт: 9:00 - 19:00, Сб: 10:00 - 16:00</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <Card className="shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl">Написать нам</CardTitle>
-                <CardDescription>Опишите свою ситуацию, и мы поможем найти решение</CardDescription>
+            <Card className="shadow-xl border-border">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-xl sm:text-2xl">Написать нам</CardTitle>
+                <CardDescription className="text-sm sm:text-base">Опишите свою ситуацию, и мы поможем найти решение</CardDescription>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={(e) => handleSubmit(e, 'contact')} className="space-y-4">
+              <CardContent className="p-4 sm:p-6">
+                <form onSubmit={(e) => handleSubmit(e, 'contact')} className="space-y-3 sm:space-y-4">
                   <div>
                     <Label htmlFor="contact-name">Ваше имя</Label>
                     <Input
@@ -372,8 +390,8 @@ const Index = () => {
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full text-lg py-6">
-                    <Icon name="Send" className="mr-2" size={20} />
+                  <Button type="submit" className="w-full text-base sm:text-lg py-5 sm:py-6">
+                    <Icon name="Send" className="mr-2" size={18} />
                     Отправить сообщение
                   </Button>
                 </form>
@@ -383,7 +401,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="bg-gradient-to-r from-primary to-secondary text-white py-12 px-4">
+      <footer className="bg-gradient-to-r from-primary to-accent text-white py-8 sm:py-12 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
