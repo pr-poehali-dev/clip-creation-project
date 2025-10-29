@@ -89,7 +89,13 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-10">
+        <div className="absolute top-0 left-0 right-0 h-1/3 bg-white"></div>
+        <div className="absolute top-1/3 left-0 right-0 h-1/3 bg-blue-600"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-red-600"></div>
+      </div>
+      <div className="relative z-10">
       <header className="bg-card border-b border-border shadow-lg py-4 px-4">
         <div className="container mx-auto max-w-6xl flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -412,6 +418,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
