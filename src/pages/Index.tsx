@@ -90,6 +90,27 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <header className="bg-white border-b shadow-sm py-4 px-4">
+        <div className="container mx-auto max-w-6xl flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <img 
+              src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
+              alt="Весы правосудия" 
+              className="w-12 h-12 object-contain"
+            />
+            <div>
+              <h2 className="text-xl font-bold text-primary">Юридические услуги</h2>
+              <p className="text-sm text-muted-foreground">Профессиональная правовая помощь</p>
+            </div>
+          </div>
+          <img 
+            src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/2f405dec-e958-45a6-9046-195a322db31d.jpg" 
+            alt="Герб России" 
+            className="w-16 h-16 object-contain hidden sm:block"
+          />
+        </div>
+      </header>
+
       <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-secondary py-20 px-4">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-20"></div>
         
@@ -234,7 +255,14 @@ const Index = () => {
 
       <section className="py-20 px-4 bg-gradient-to-r from-blue-50 to-purple-50">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 space-y-4">
+          <div className="text-center mb-16 space-y-6">
+            <div className="flex justify-center mb-6">
+              <img 
+                src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
+                alt="Весы правосудия" 
+                className="w-24 h-24 object-contain opacity-80"
+              />
+            </div>
             <h2 className="text-4xl lg:text-5xl font-bold">Почему выбирают нас</h2>
           </div>
 
