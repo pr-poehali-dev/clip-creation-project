@@ -110,20 +110,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-10">
-        <div className="absolute top-0 left-0 right-0 h-1/3 bg-white"></div>
-        <div className="absolute top-1/3 left-0 right-0 h-1/3 bg-blue-600"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-red-600"></div>
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-10 animate-wave">
+        <div className="absolute top-0 left-0 right-0 h-1/3 bg-white animate-wave" style={{ animationDelay: '0s' }}></div>
+        <div className="absolute top-1/3 left-0 right-0 h-1/3 bg-blue-600 animate-wave" style={{ animationDelay: '0.3s' }}></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-red-600 animate-wave" style={{ animationDelay: '0.6s' }}></div>
       </div>
       <div className="relative z-10">
       <header className="bg-card border-b border-border shadow-lg py-3 px-4">
         <div className="container mx-auto max-w-6xl flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-4">
-            <img 
-              src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
-              alt="Весы правосудия" 
-              className="w-10 h-10 sm:w-12 sm:h-12 object-contain brightness-110"
-            />
+            <div className="relative p-2 bg-gradient-to-br from-primary to-accent rounded-lg animate-glow">
+              <img 
+                src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
+                alt="Весы правосудия" 
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain animate-float"
+              />
+            </div>
             <div>
               <h2 className="text-base sm:text-xl font-bold text-primary">Юридические услуги</h2>
               <p className="text-xs sm:text-sm text-muted-foreground hidden xs:block">Профессиональная правовая помощь</p>
@@ -282,11 +284,13 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 sm:mb-16 space-y-4 sm:space-y-6">
             <div className="flex justify-center mb-4 sm:mb-6">
-              <img 
-                src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
-                alt="Весы правосудия" 
-                className="w-16 h-16 sm:w-24 sm:h-24 object-contain opacity-80"
-              />
+              <div className="relative p-4 sm:p-6 bg-gradient-to-br from-primary to-accent rounded-2xl animate-glow">
+                <img 
+                  src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
+                  alt="Весы правосудия" 
+                  className="w-12 h-12 sm:w-16 sm:h-16 object-contain animate-float"
+                />
+              </div>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Почему выбирают нас</h2>
           </div>
