@@ -89,14 +89,14 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <header className="bg-white border-b shadow-sm py-4 px-4">
+    <div className="min-h-screen bg-background">
+      <header className="bg-card border-b border-border shadow-lg py-4 px-4">
         <div className="container mx-auto max-w-6xl flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img 
               src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/64574394-9900-4d0d-af54-f5c067729c38.jpg" 
               alt="Весы правосудия" 
-              className="w-12 h-12 object-contain"
+              className="w-12 h-12 object-contain brightness-110"
             />
             <div>
               <h2 className="text-xl font-bold text-primary">Юридические услуги</h2>
@@ -106,12 +106,12 @@ const Index = () => {
           <img 
             src="https://cdn.poehali.dev/projects/b5501066-ba01-4ce1-bc5c-8b702e72fd95/files/2f405dec-e958-45a6-9046-195a322db31d.jpg" 
             alt="Герб России" 
-            className="w-16 h-16 object-contain hidden sm:block"
+            className="w-16 h-16 object-contain hidden sm:block brightness-110"
           />
         </div>
       </header>
 
-      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-secondary py-20 px-4">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-accent py-20 px-4">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-20"></div>
         
         <div className="container mx-auto max-w-6xl relative z-10">
@@ -170,7 +170,7 @@ const Index = () => {
               </div>
             </div>
 
-            <Card className="bg-white/95 backdrop-blur shadow-2xl animate-scale-in">
+            <Card className="bg-card/95 backdrop-blur shadow-2xl animate-scale-in border-border">
               <CardHeader>
                 <CardTitle className="text-2xl">Оставить заявку</CardTitle>
                 <CardDescription>Получите бесплатную консультацию юриста</CardDescription>
@@ -236,7 +236,7 @@ const Index = () => {
               >
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-gradient-to-br from-primary to-secondary rounded-xl text-white">
+                    <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-xl text-background">
                       <Icon name={service.icon} size={28} />
                     </div>
                     <div>
@@ -253,7 +253,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-50 to-purple-50">
+      <section className="py-20 px-4 bg-secondary/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16 space-y-6">
             <div className="flex justify-center mb-6">
@@ -274,7 +274,7 @@ const Index = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="pt-8 pb-6 space-y-4">
-                  <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                  <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
                     <Icon name={adv.icon} size={32} className="text-white" />
                   </div>
                   <h3 className="text-xl font-bold">{adv.title}</h3>
