@@ -23,6 +23,16 @@ const Index = () => {
     message: '',
   });
 
+  const [stats, setStats] = useState({
+    cases: 0,
+    clients: 0,
+    experience: 0,
+    winRate: 0,
+  });
+
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
   const handleSubmit = (e: React.FormEvent, formType: string) => {
     e.preventDefault();
     toast({
@@ -33,6 +43,37 @@ const Index = () => {
   };
 
   useEffect(() => {
+    const animateValue = (start: number, end: number, duration: number, callback: (value: number) => void) => {
+      const startTime = performance.now();
+      const animate = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(start + (end - start) * easeOutQuart);
+        callback(current);
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      requestAnimationFrame(animate);
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          animateValue(0, 1500, 2000, (val) => setStats(prev => ({ ...prev, cases: val })));
+          animateValue(0, 3200, 2000, (val) => setStats(prev => ({ ...prev, clients: val })));
+          animateValue(0, 15, 2000, (val) => setStats(prev => ({ ...prev, experience: val })));
+          animateValue(0, 94, 2000, (val) => setStats(prev => ({ ...prev, winRate: val })));
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (statsRef.current) {
+      statsObserver.observe(statsRef.current);
+    }
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -49,8 +90,13 @@ const Index = () => {
     const elements = document.querySelectorAll('.scroll-animate');
     elements.forEach(el => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      if (statsRef.current) {
+        statsObserver.unobserve(statsRef.current);
+      }
+    };
+  }, [hasAnimated]);
 
   const services = [
     {
@@ -240,6 +286,53 @@ const Index = () => {
                     Отправить заявку
                   </Button>
                 </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-20 px-4 bg-gradient-to-br from-primary/5 to-accent/5">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Наши достижения</h2>
+            <p className="text-base sm:text-xl text-muted-foreground">Цифры, которые говорят сами за себя</p>
+          </div>
+
+          <div ref={statsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+            <Card className="text-center p-6 sm:p-8 hover:shadow-xl transition-all hover:scale-105 bg-gradient-to-br from-card to-card/80">
+              <CardContent className="p-0 space-y-2">
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary">
+                  {stats.cases.toLocaleString()}+
+                </div>
+                <div className="text-sm sm:text-base text-muted-foreground">Успешных дел</div>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6 sm:p-8 hover:shadow-xl transition-all hover:scale-105 bg-gradient-to-br from-card to-card/80">
+              <CardContent className="p-0 space-y-2">
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary">
+                  {stats.clients.toLocaleString()}+
+                </div>
+                <div className="text-sm sm:text-base text-muted-foreground">Довольных клиентов</div>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6 sm:p-8 hover:shadow-xl transition-all hover:scale-105 bg-gradient-to-br from-card to-card/80">
+              <CardContent className="p-0 space-y-2">
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary">
+                  {stats.experience}+
+                </div>
+                <div className="text-sm sm:text-base text-muted-foreground">Лет опыта</div>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6 sm:p-8 hover:shadow-xl transition-all hover:scale-105 bg-gradient-to-br from-card to-card/80">
+              <CardContent className="p-0 space-y-2">
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary">
+                  {stats.winRate}%
+                </div>
+                <div className="text-sm sm:text-base text-muted-foreground">Выигранных дел</div>
               </CardContent>
             </Card>
           </div>
